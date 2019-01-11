@@ -8,7 +8,7 @@ import { Subject } from 'rxjs';
 export class RecipeService {
     recipesChanged = new Subject<Recipe[]>();
 
-    private recipes: Recipe[] = [new Recipe('Schnitzel','This is a tasty homemade schnitzel.',
+    private recipes: Recipe[] = [new Recipe('Schnitzel', 'This is a tasty homemade schnitzel.',
         'https://www.washingtonpost.com/rf/image_1484w/2010-2019/WashingtonPost/2016/10/12/Food/Images/PorkSchnitzel-93591476292525.jpg?t=20170517',
         [new Ingredient('Meat', 1), new Ingredient('French Fries', 19)]),
         new Recipe('Cheeseburger',
@@ -18,6 +18,11 @@ export class RecipeService {
     ];
 
     constructor(private slService: ShoppingListService) {}
+    setRecipes(recipes: Recipe[]) {
+        this.recipes = recipes;
+        this.recipesChanged.next(this.recipes.slice());
+    }
+
     getRecipes() {
         return this.recipes.slice();
     }
@@ -45,5 +50,5 @@ export class RecipeService {
         this.recipesChanged.next(this.recipes.slice());
     }
 
-    
+
 }
