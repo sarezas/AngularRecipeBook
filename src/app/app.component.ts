@@ -12,12 +12,8 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     firebase.initializeApp({
-      apiKey: 'removed for safety reasons',
+      apiKey: 'AIzaSyAdrU3segi4D0fK-A--wpM7tK-NibzSvfo',
       authDomain: 'recipes-ng-sharis.firebaseapp.com'
     });
-  }
-
-  onNavigate(link: string) {
-    this.loadedFeature = link;
   }
 }
