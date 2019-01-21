@@ -1,15 +1,12 @@
-import { Injectable } from '@angular/core';
 import { Recipe } from './recipe.model';
 import { Ingredient } from '../shared/ingredient.model';
-import { ShoppingListService } from '../shopping-list/shopping-list.service';
 import { Subject } from 'rxjs';
 
-@Injectable()
 export class RecipeService {
     recipesChanged = new Subject<Recipe[]>();
 
     private recipes: Recipe[] = [new Recipe('Schnitzel', 'This is a tasty homemade schnitzel.',
-        'https://www.washingtonpost.com/rf/image_1484w/2010-2019/WashingtonPost/2016/10/12/Food/Images/PorkSchnitzel-93591476292525.jpg?t=20170517',
+'https://www.washingtonpost.com/rf/image_1484w/2010-2019/WashingtonPost/2016/10/12/Food/Images/PorkSchnitzel-93591476292525.jpg?t=20170517',
         [new Ingredient('Meat', 1), new Ingredient('French Fries', 19)]),
         new Recipe('Cheeseburger',
         'This is a fat burger.',
@@ -17,7 +14,8 @@ export class RecipeService {
         [new Ingredient('Cheese', 1), new Ingredient('Buns', 2)])
     ];
 
-    constructor(private slService: ShoppingListService) {}
+    constructor() {}
+
     setRecipes(recipes: Recipe[]) {
         this.recipes = recipes;
         this.recipesChanged.next(this.recipes.slice());
@@ -29,10 +27,6 @@ export class RecipeService {
 
     getRecipe(index: number) {
         return this.recipes[index];
-    }
-
-    addIngredientsToShoppingList(ingrdients: Ingredient[]) {
-        this.slService.addIngredients(ingrdients);
     }
 
     addRecipe(recipe: Recipe) {
