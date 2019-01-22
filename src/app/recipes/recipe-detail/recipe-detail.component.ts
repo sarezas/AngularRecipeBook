@@ -5,7 +5,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Store } from '@ngrx/store';
 import * as ShoppingListActions from '../../shopping-list/ngRx-store/shopping-list.actions';
-import * as fromShoppingList from '../../shopping-list/ngRx-store/shopping-list.reducers';
+import * as fromApp from '../../store/app.reducers';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -20,7 +20,7 @@ export class RecipeDetailComponent implements OnInit {
               private route: ActivatedRoute,
               private router: Router,
               private authService: AuthService,
-              private store: Store<fromShoppingList.AppState>) { }
+              private store: Store<fromApp.AppState>) { }
 
             ngOnInit() {
     // const id = this.route.snapshot.params['id'];
@@ -45,8 +45,8 @@ export class RecipeDetailComponent implements OnInit {
     this.router.navigate(['/recipes']);
   }
 
-  isAuthenticated() {
-    return this.authService.isAuthenticated();
-  }
+  // isAuthenticated() {
+  //   return this.authService.isAuthenticated();
+  // }
 
 }
