@@ -21,7 +21,7 @@ import { AuthEffects } from './auth/store/auth.effects';
     AppComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({appId: 'recipe-app'}),
     AppRoutingModule,
     HttpClientModule,
     SharedModule,
