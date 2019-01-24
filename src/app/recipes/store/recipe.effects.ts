@@ -1,10 +1,11 @@
 import { HttpClient, HttpRequest } from '@angular/common/http';
 import { Effect, Actions, ofType } from '@ngrx/effects';
 import { switchMap, map, withLatestFrom } from 'rxjs/operators';
-import * as RecipeActions from '../store/recipe.actions';
-import { Recipe } from '../recipe.model';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
+
+import * as RecipeActions from '../store/recipe.actions';
+import { Recipe } from '../recipe.model';
 import * as fromRecipe from '../store/recipe.reducers';
 
 @Injectable()
@@ -15,8 +16,8 @@ export class RecipeEffects {
 
     @Effect()
     recipeFetch = this.actions$
-        .pipe(ofType(RecipeActions.FETCH_RECIPES))
         .pipe(
+            ofType(RecipeActions.FETCH_RECIPES),
             switchMap((action: RecipeActions.FetchRecipes) => {
                 return this.httpClient.get<Recipe[]>('https://recipes-ng-sharis.firebaseio.com/recipes.json', {
                     observe: 'body',
@@ -38,8 +39,8 @@ export class RecipeEffects {
 
     @Effect({dispatch: false})
     recipeStore = this.actions$
-        .pipe(ofType(RecipeActions.STORE_RECIPES))
         .pipe(
+            ofType(RecipeActions.STORE_RECIPES),
             withLatestFrom(this.store.select('recipes')),
             switchMap(([action, state]) => {
                 const request = new HttpRequest('PUT', 'https://recipes-ng-sharis.firebaseio.com/recipes.json',
